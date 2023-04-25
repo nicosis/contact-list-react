@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-const urlApi =
-  "https://assets.breatheco.de/apis/fake/contact/agenda/nicosis-agenda";
+const urlApiGet ="https://assets.breatheco.de/apis/fake/contact/agenda/nicosis-agenda";
+const urlApiPost ="https://assets.breatheco.de/apis/fake/contact/";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -11,8 +11,7 @@ const ContactList = () => {
       method: "GET",
       redirect: "follow"
     };
-
-    const response = await fetch(urlApi, requestOptions);
+    const response = await fetch(urlApiGet, requestOptions);
     const data = await response.json();
     setContacts(data);
   };
