@@ -18,16 +18,22 @@ const AddContactForm = () => {
       address: "Avellaneda",
       phone: phone,
     });
-
+    const newconstactOk = {
+      full_name: fullName,
+      email: email,
+      agenda_slug: "nicosis-agenda",
+      address: "Avellaneda",
+      phone: phone,
+    };
     setFullName("");
     setPhone("");
     setEmail("");
 
     // hacer el POST...
-
+    console.log("log de json", JSON.stringify(newconstactOk));
     fetch(urlApiPost, {
       method: "POST",
-      body: JSON.stringify(newContact), // data can be a `string` or  an {object} which comes from somewhere further above in our application
+      body: JSON.stringify(newconstactOk), // data can be a `string` or  an {object} which comes from somewhere further above in our application
       headers: {
         "Content-Type": "application/json",
       },

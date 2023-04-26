@@ -9,7 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import AddContactForm from "./views/addContactform";
+import AddContactForm from "./views/addContactForm";
 
 //create your first component
 const Layout = () => {
