@@ -14,14 +14,14 @@ const AddContactForm = () => {
     setNewContact({
       full_name: fullName,
       email: email,
-      agenda_slug: "nicosis-agenda",
+      agenda_slug: "agenda-flaco",
       address: "Avellaneda",
       phone: phone,
     });
     const newconstactOk = {
       full_name: fullName,
       email: email,
-      agenda_slug: "nicosis-agenda",
+      agenda_slug: "agenda-flaco",
       address: "Avellaneda",
       phone: phone,
     };
