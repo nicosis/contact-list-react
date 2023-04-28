@@ -5,35 +5,27 @@ const AddContactForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [newContact, setNewContact] = useState({});
-
-  console.log("new contact:", newContact);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNewContact({
-      full_name: fullName,
-      email: email,
-      agenda_slug: "agenda-flaco",
-      address: "Avellaneda",
-      phone: phone,
-    });
-    const newconstactOk = {
+
+    const newcontact = {
       full_name: fullName,
       email: email,
       agenda_slug: "agenda-flaco",
       address: "Avellaneda",
       phone: phone,
     };
+    
     setFullName("");
     setPhone("");
     setEmail("");
 
     // hacer el POST...
-    console.log("log de json", JSON.stringify(newconstactOk));
+    console.log("log de json", JSON.stringify(newcontact));
     fetch(urlApiPost, {
       method: "POST",
-      body: JSON.stringify(newconstactOk), // data can be a `string` or  an {object} which comes from somewhere further above in our application
+      body: JSON.stringify(newcontact), // data can be a `string` or  an {object} which comes from somewhere further above in our application
       headers: {
         "Content-Type": "application/json",
       },
@@ -47,7 +39,7 @@ const AddContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="fullName">Full Name</label>
         <input
@@ -78,8 +70,8 @@ const AddContactForm = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <button type="submit" className="btn btn-primary">
-        Add Contact
+      <button type="submit" className="btn btn-primary mt-2">
+        Done
       </button>
     </form>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import ContactList from "./constactList";
+import ContactList from "./contactList";
 import "../../styles/home.css";
 
 export const Home = () => {

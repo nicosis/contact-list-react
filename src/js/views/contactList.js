@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import "../../styles/contactList.css";
 const urlApiGet =
   "https://assets.breatheco.de/apis/fake/contact/agenda/agenda-flaco";
 const urlApiPost = "https://assets.breatheco.de/apis/fake/contact/";
@@ -22,6 +24,10 @@ const ContactList = () => {
     getAllContacts();
   }, []);
 
+  const editContactId = (id) => {
+    console.log("edit:", id);
+  };
+
   const deleteContactId = async (id) => {
     var requestOptions = {
       method: "DELETE",
@@ -30,11 +36,11 @@ const ContactList = () => {
     const response = await fetch(urlApiDeleteId + id, requestOptions);
     const data = await response.json();
     console.log("data:", data);
-    getAllContacts()
+    getAllContacts();
   };
 
   return (
-    <ul className="list-group">
+    <ul className="list-group mx-5">
       {contacts.map((contact) => (
         <li key={contact.id} className="list-group-item">
           <div className="row align-items-center">
@@ -47,12 +53,20 @@ const ContactList = () => {
               <p className="mb-0">Email: {contact.email}</p>
               <p className="mb-0">Address: {contact.address}</p>
             </div>
-            <button
-              className="btn btn-primary"
-              onClick={() => deleteContactId(contact.id)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="btn btn-secondary"
+                onClick={() => editContactId(contact.id)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => deleteContactId(contact.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </li>
       ))}

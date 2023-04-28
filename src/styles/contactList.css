@@ -1,0 +1,15 @@
+.list-group-item {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #343a40;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
