@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/contactList.css";
-
-const urlApiGet =
-  "https://assets.breatheco.de/apis/fake/contact/agenda/agenda-flaco";
-const urlApiPost = "https://assets.breatheco.de/apis/fake/contact/";
-const urlApiDeleteId = "https://assets.breatheco.de/apis/fake/contact/";
+import { urlApiGet, urlApiPost, urlApiDeleteId } from "../component/url";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
