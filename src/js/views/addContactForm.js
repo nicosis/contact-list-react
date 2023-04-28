@@ -83,7 +83,7 @@ const AddContactForm = () => {
           />
         </div>
       </div>
-      <button type="submit" className="btn btn-primary mt-3">
+      <button type="submit" className="btn btn-success mt-3">
         Done
       </button>
     </form>

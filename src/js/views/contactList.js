@@ -56,7 +56,7 @@ const ContactList = () => {
             </div>
             <div className="d-flex justify-content-center">
               <button
-                className="btn btn-secondary m-1"
+                className="btn btn-warning m-1"
                 onClick={() => editContactId(contact.id)}
               >
                 Edit
