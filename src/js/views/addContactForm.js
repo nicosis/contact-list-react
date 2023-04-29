@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-import { urlApiContact, urlLegoFace } from "../component/url";
+import { urlApiContact } from "../component/url";
 
 const AddContactForm = () => {
   const [fullName, setFullName] = useState("");
@@ -10,8 +10,6 @@ const AddContactForm = () => {
   const params = useParams(); // preguntar, porque Oscar usa {}? no me funciona con llaves
   const [isEditing, setIsEditing] = useState(false);
   // const history = useHistory();
-
-  console.log("is editing: ", isEditing);
 
   useEffect(() => {
     if (params.id) {
@@ -32,8 +30,6 @@ const AddContactForm = () => {
         .catch((error) => console.error(error));
     }
   }, [params.id]);
-
-  console.log("parametro: ", params);
 
   const handleSubmit = (e) => {
     e.preventDefault();
