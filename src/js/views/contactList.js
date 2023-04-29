@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/contactList.css";
-import { urlApiGet, urlApiPost, urlApiDeleteId } from "../component/url";
+import { urlApiGet, urlApiContact } from "../component/url";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -29,7 +29,7 @@ const ContactList = () => {
       method: "DELETE",
       redirect: "follow",
     };
-    const response = await fetch(urlApiDeleteId + id, requestOptions);
+    const response = await fetch(urlApiContact + id, requestOptions);
     const data = await response.json();
     console.log("data:", data);
     getAllContacts();
@@ -51,12 +51,14 @@ const ContactList = () => {
               <p className="mb-0">Address: {contact.address}</p>
             </div>
             <div className="d-flex justify-content-center">
-              <button
-                className="btn btn-warning m-1"
-                onClick={() => editContactId(contact.id)}
-              >
-                Edit
-              </button>
+              <Link to={`/edit-form/${contact.id}`}>
+                <button
+                  className="btn btn-warning m-1"
+                  onClick={() => editContactId(contact.id)}
+                >
+                  Edit
+                </button>
+              </Link>
               <button
                 className="btn btn-danger m-1"
                 onClick={() => deleteContactId(contact.id)}

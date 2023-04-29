@@ -1,16 +1,47 @@
-import React, { useState } from "react";
-
-const urlApiPost = "https://assets.breatheco.de/apis/fake/contact/";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { urlApiContact } from "../component/url";
 
 const AddContactForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const params = useParams(); // preguntar, porque Oscar usa {}? no me funciona con llaves
+  const [isEditing, setIsEditing] = useState(false);
+  // const history = useHistory();
+
+  console.log("is editing: ", isEditing);
+
+  useEffect(() => {
+    if (params.id) {
+      fetch(urlApiContact + params.id)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener contacto");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Establezco el estado del campo Name del formulario. ESto teneis que hacerlo para los 3 campos del formulario
+          setFullName(data.full_name);
+          setEmail(data.email);
+          setPhone(data.phone);
+          setIsEditing(true);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [params.id]);
+
+  console.log("parametro: ", params);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newcontact = {
+    const url = isEditing ? urlApiContact + params.id : urlApiContact;
+    const method = isEditing ? "PUT" : "POST";
+
+    const newContact = {
       full_name: fullName,
       email: email,
       agenda_slug: "agenda-flaco",
@@ -23,19 +54,21 @@ const AddContactForm = () => {
     setEmail("");
 
     // hacer el POST...
-    console.log("log de json", JSON.stringify(newcontact));
-    fetch(urlApiPost, {
-      method: "POST",
-      body: JSON.stringify(newcontact), // data can be a `string` or  an {object} which comes from somewhere further above in our application
+    fetch(url, {
+      method: method,
+      body: JSON.stringify(newContact), // data can be a `string` or  an {object} which comes from somewhere further above in our application
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        if (!res.ok) throw Error(res.statusText);
-        return res.json();
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
       })
-      .then((response) => console.log("Success:", response))
+      .then((response) => {
+        console.log("Success:", response);
+        // history.push("/");
+      })
       .catch((error) => alert(error));
   };
 
@@ -83,7 +116,11 @@ const AddContactForm = () => {
           />
         </div>
       </div>
-      <button type="submit" className="btn btn-success mt-3">
+      <button
+        type="submit"
+        className="btn btn-success mt-3"
+        value={isEditing ? "Editar Contacto" : "Añadir Contacto"} //para que uso aqui el value?
+      >
         Done
       </button>
     </form>
