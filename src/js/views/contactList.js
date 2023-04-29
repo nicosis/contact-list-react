@@ -18,8 +18,8 @@ const ContactList = () => {
 
   useEffect(() => {
     getAllContacts();
-  }, []);
-  //En el hook de la línea 23, poner como dependencia la variable 'conctacts' en el array de dependencias
+  }, [contacts]); //La dependencia 'conctacts' actualiza el mapeao cada vez que borro un contacto
+  
   const editContactId = (id) => {
     console.log("edit:", id);
   };
@@ -32,8 +32,11 @@ const ContactList = () => {
     const response = await fetch(urlApiContact + id, requestOptions);
     const data = await response.json();
     console.log("data:", data);
-    getAllContacts();
-    //39. Cambiar el getAllContacts por la actualización de la variable de estado mediante setContacts y usando el filter adeucadamente
+    // getAllContacts(); // podria solamente hacer un get y no el filter. depende el caso si quiero mantener localmente la info o no
+    const updatedContacts = contacts.filter(
+      (contact) => contact.id !== id
+    );
+    setContacts(updatedContacts);
   };
 
   return (

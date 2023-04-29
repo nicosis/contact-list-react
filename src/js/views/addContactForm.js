@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-import { urlApiContact } from "../component/url";
+import { urlApiContact, urlLegoFace } from "../component/url";
 
 const AddContactForm = () => {
   const [fullName, setFullName] = useState("");
@@ -45,7 +45,7 @@ const AddContactForm = () => {
       full_name: fullName,
       email: email,
       agenda_slug: "agenda-flaco",
-      address: "Avellaneda",
+      address: "Avellaneda, Buenos Aires.",
       phone: phone,
     };
 
@@ -119,9 +119,9 @@ const AddContactForm = () => {
       <button
         type="submit"
         className="btn btn-success mt-3"
-        value={isEditing ? "Editar Contacto" : "Añadir Contacto"} //para que uso aqui el value?
+        //value={isEditing ? "Editar Contacto" : "Añadir Contacto"} //para que uso aqui el value?
       >
-        Done
+        {isEditing ? "Edit Contact" : "Add Contact"}
       </button>
     </form>
   );
