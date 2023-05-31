@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { urlApiContact } from "../component/url";
 
 const AddContactForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const params = useParams(); // preguntar, porque Oscar usa {}? no me funciona con llaves
+  const params = useParams(); // {} con llaves lo desestructuro y despues no hace falta entrar con el nombre del objeto
   const [isEditing, setIsEditing] = useState(false);
-  // const history = useHistory();
+  const navigate = useNavigate(); // hook que funciona como link pero se puede usar en js
+  const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
     if (params.id) {
@@ -49,7 +49,7 @@ const AddContactForm = () => {
     setPhone("");
     setEmail("");
 
-    // hacer el POST...
+    // hacer el POST/PUT
     fetch(url, {
       method: method,
       body: JSON.stringify(newContact), // data can be a `string` or  an {object} which comes from somewhere further above in our application
@@ -63,7 +63,8 @@ const AddContactForm = () => {
       })
       .then((response) => {
         console.log("Success:", response);
-        // history.push("/");
+        alert("creado OK");
+        navigate("/"); // regresar al home
       })
       .catch((error) => alert(error));
   };
@@ -112,11 +113,7 @@ const AddContactForm = () => {
           />
         </div>
       </div>
-      <button
-        type="submit"
-        className="btn btn-success mt-3"
-        //value={isEditing ? "Editar Contacto" : "Añadir Contacto"} //para que uso aqui el value?
-      >
+      <button type="submit" className="btn btn-success mt-3">
         {isEditing ? "Edit Contact" : "Add Contact"}
       </button>
     </form>

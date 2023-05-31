@@ -33,11 +33,6 @@ const ContactList = () => {
     setContacts(updatedContacts);
   };
 
-  // const getFaces = (conctact) => {
-  //   let random = Math.floor(Math.random() * 9);
-  //   return urlLegoFace + random + ".jpg";
-  // };
-
   return (
     <ul className="list-group mx-5">
       {contacts.map((contact, index) => (
